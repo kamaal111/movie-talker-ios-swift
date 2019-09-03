@@ -21,10 +21,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
     var titleLength = 1
-<<<<<<< HEAD
-=======
+
     let baseUrl = "http://localhost:5000"
->>>>>>> master
+
     
     func requestSpeechAutherization() -> Void {
         SFSpeechRecognizer.requestAuthorization {
@@ -118,7 +117,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 self.spokenTextLabel.text = bestString
                 
                 let splittenString = bestString.split(separator: " ")
-<<<<<<< HEAD
                 if splittenString.count > self.titleLength {
                     let range = splittenString
                         .index(splittenString.endIndex, offsetBy: -self.titleLength) ..< splittenString.endIndex
@@ -128,13 +126,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                     // CALL API HERE
                 }
                 
-=======
                 if splittenString.count >= self.titleLength {
                     let range = splittenString.index(splittenString.endIndex, offsetBy: -self.titleLength) ..< splittenString.endIndex
                     let slicedArray = splittenString[range]
                     self.plotLabel.text = (slicedArray.joined(separator:" "))
                 }
->>>>>>> master
             } else if let error = error {
                 print(error)
             }
