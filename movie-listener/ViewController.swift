@@ -12,18 +12,19 @@ import Speech
 
 class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var spokenTextLabel: UILabel!
-    @IBOutlet weak var plotLabel: UILabel!
     @IBOutlet weak var tapToSpeakButton: UIButton!
     
+    @IBOutlet var MovieList: [UILabel]!
+    
+    
+    var titleLength = 1
+    let baseUrl = "http://localhost:5000"
+//    let baseUrl = "https://pure-gorge-27494.herokuapp.com"
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? =  SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
-    var titleLength = 1
-
-    let baseUrl = "http://localhost:5000"
-
     
     func requestSpeechAutherization() -> Void {
         SFSpeechRecognizer.requestAuthorization {
@@ -53,32 +54,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         super.viewDidLoad()
         
         self.requestSpeechAutherization()
-        
     }
-    
-    func apiRequest(at url: String, for title: String, completion: @escaping (_ res: [String: Any]) -> Void) {
-        guard let url = URL(string: "\(url)/movies/search/\(title)") else { return }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let dataResponse = data, error == nil else {
-                print(error?.localizedDescription ?? "Response Error")
-                return
-            }
-            do {
-                let jsonResponse = try JSONSerialization.jsonObject(with: dataResponse, options: [])
-                completion(jsonResponse as! [String : Any])
-            } catch let parsingError { print("Error", parsingError) }
-        }
-        task.resume()
-    }
-    
-    func getMovies(from url: String, for title: String?) -> Void {
-        self.apiRequest(at: "http://localhost:5000", for: "batman", completion: {
-            (res: Any) in if let dictionary = res as? [String: Any] {
-                print(dictionary)
-            }
-        })
-    }
-    
     
     func sendAlert(message: String) {
         let alert = UIAlertController(title: "Speech Recognizer Error", message: message, preferredStyle: UIAlertController.Style.alert)
@@ -114,22 +90,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             result, error in
             if let result = result {
                 let bestString = result.bestTranscription.formattedString
-                self.spokenTextLabel.text = bestString
                 
                 let splittenString = bestString.split(separator: " ")
-                if splittenString.count > self.titleLength {
-                    let range = splittenString
-                        .index(splittenString.endIndex, offsetBy: -self.titleLength) ..< splittenString.endIndex
-                    let arraySlice = splittenString[range]
-                    self.plotLabel.text = (arraySlice.joined(separator:" "))
-                    
-                    // CALL API HERE
-                }
                 
                 if splittenString.count >= self.titleLength {
                     let range = splittenString.index(splittenString.endIndex, offsetBy: -self.titleLength) ..< splittenString.endIndex
                     let slicedArray = splittenString[range]
-                    self.plotLabel.text = (slicedArray.joined(separator:" "))
+                    self.spokenTextLabel.text = (slicedArray.joined(separator:" "))
                 }
             } else if let error = error {
                 print(error)
@@ -148,8 +115,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     func getMovies(at url: String, for title: String?) -> Void {
         if let title = title {
             apiRequest(at: url, for: title, completion: {
-                (res: Any) in if let dictionary = res as? [String: Any] {
-                    print(dictionary)
+                (res: Any) in if let dictionary = res as? [String: Any],
+                    let data = dictionary["data"] as? [String: Any],
+                    let results = data["results"] as? [[String: Any]] {
+                    print(results.count)
+//                    for result in results {
+//                        print(result)
+//                    }
                 }
             })
         }
@@ -158,12 +130,10 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBAction func tapToSpeak(_ sender: UIButton) {
         if isRecording == true {
             self.cancelRecording()
-            self.getMovies(at: self.baseUrl, for: self.plotLabel.text)
+            self.getMovies(at: self.baseUrl, for: self.spokenTextLabel.text)
             isRecording = false
             tapToSpeakButton.setTitle("START", for: .normal)
             tapToSpeakButton.setTitleColor(.gray, for: .normal)
-//            print(self.plotLabel.text ?? String.self)
-            self.getMovies(from: "http://localhost:5000", for: self.plotLabel.text)
         } else {
             self.recordAndRecognizeSpeech()
             isRecording = true
