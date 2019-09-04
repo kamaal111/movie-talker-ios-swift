@@ -26,6 +26,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
+    var model = [MovieMap]()
     
     func requestSpeechAutherization() -> Void {
         SFSpeechRecognizer.requestAuthorization {
@@ -118,7 +119,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         recognitionTask?.cancel()
     }
     
-    var model = [MovieMap]()
+    @objc func tapMovie(sender: UITapGestureRecognizer) {
+        let movie = self.model[0].results[0]
+        if let overview = movie["overview"] {
+            print(overview)
+        }
+    }
     
     
     func getMovies(at url: String, for title: String?) -> Void {
@@ -134,9 +140,16 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 
                         for (index, result) in self.model[0].results.enumerated() {
                             //  release_date
-                            if let originalTitle = result["original_title"] as? String {
+                            if let originalTitle = result["original_title"] as? String,
+                                let _ = result["overview"] as? String {
                                 DispatchQueue.main.async {
                                     self.MovieList[index].text = originalTitle
+
+                                    let tap = UITapGestureRecognizer(
+                                        target: self, action: #selector(self.tapMovie(sender:))
+                                    )
+                                    self.MovieList[index].isUserInteractionEnabled = true
+                                    self.MovieList[index].addGestureRecognizer(tap)
                                 }
                             }
                         }
