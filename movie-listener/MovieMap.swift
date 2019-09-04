@@ -6,7 +6,7 @@
 //  Copyright © 2019 Kamaal. All rights reserved.
 //
 
-class MovieMap {
+struct MovieMap {
     var results: [[String: Any]]
     
     init(_ dict: [String: Any]) {

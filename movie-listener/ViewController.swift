@@ -121,12 +121,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     @objc func tapMovie(sender: UITapGestureRecognizer) {
-        let movie = self.model[0].results[0]
+        let currentIndex: Int = self.model.count - 1
+        let movie = self.model[currentIndex]
+            .results[Int.random(in: 0..<self.model[currentIndex].results.count)]
         if let overview = movie["overview"] as? String {
             let utterance = AVSpeechUtterance(string: overview)
             utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
             utterance.rate = 0.5
-            
             let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
             print(overview)
@@ -143,9 +144,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                     let data = dictionary["data"] as? [String: Any] {
                     
                     self.model.append(MovieMap(data))
-                    print("start", self.model[0].results.count)
+                    print("start", self.model[self.model.count - 1].results.count)
 
-                        for (index, result) in self.model[0].results.enumerated() {
+                        for (index, result) in self.model[self.model.count - 1].results.enumerated() {
                             if let originalTitle = result["original_title"] as? String,
                                 let _ = result["overview"] as? String,
                                 let _ = result["release_date"] as? String {
@@ -172,22 +173,22 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 //            self.getMovies(at: self.baseUrl, for: "Batman")
 
             if (self.model.count >= 1) {
-                 print("End", self.model[0].results.count)
+                 print("End", self.model[self.model.count - 1].results.count)
             }
            
             isRecording = false
             tapToSpeakButton.setTitle("START", for: .normal)
-            return tapToSpeakButton.setTitleColor(.gray, for: .normal)
+            tapToSpeakButton.setTitleColor(.gray, for: .normal)
+        } else {
+            for movie in self.MovieList {
+                movie.text = ""
+            }
+            
+            self.recordAndRecognizeSpeech()
+            isRecording = true
+            tapToSpeakButton.setTitle("STOP", for: .normal)
+            tapToSpeakButton.setTitleColor(.red, for: .normal)
         }
-        
-        for movie in self.MovieList {
-            movie.text = ""
-        }
-        
-        self.recordAndRecognizeSpeech()
-        isRecording = true
-        tapToSpeakButton.setTitle("STOP", for: .normal)
-        return tapToSpeakButton.setTitleColor(.red, for: .normal)
     }
 }
 
