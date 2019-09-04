@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60461F91231F008400590771 /* MovieMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60461F90231F008400590771 /* MovieMap.swift */; };
 		607A23C9231EB80600D26B00 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607A23C8231EB80600D26B00 /* APIRequest.swift */; };
 		60BB5F2C231E3459006B9E4B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BB5F2B231E3459006B9E4B /* AppDelegate.swift */; };
 		60BB5F2E231E3459006B9E4B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60BB5F2D231E3459006B9E4B /* ViewController.swift */; };
 		60BB5F33231E345A006B9E4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60BB5F32231E345A006B9E4B /* Assets.xcassets */; };
 		60BB5F36231E345A006B9E4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60BB5F34231E345A006B9E4B /* LaunchScreen.storyboard */; };
 		60F6AA4A231E720100FCC8E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60F6AA48231E720100FCC8E2 /* Main.storyboard */; };
+		60F6AA4C231EA6F900FCC8E2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60F6AA4B231EA6F900FCC8E2 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		60461F90231F008400590771 /* MovieMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMap.swift; sourceTree = "<group>"; };
 		607A23C8231EB80600D26B00 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		60BB5F28231E3459006B9E4B /* movie-listener.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "movie-listener.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60BB5F2B231E3459006B9E4B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,7 @@
 		60BB5F35231E345A006B9E4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60BB5F37231E345A006B9E4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60F6AA49231E720100FCC8E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		60F6AA4B231EA6F900FCC8E2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,7 @@
 		60BB5F1F231E3459006B9E4B = {
 			isa = PBXGroup;
 			children = (
+				60F6AA4B231EA6F900FCC8E2 /* Default-568h@2x.png */,
 				60BB5F2A231E3459006B9E4B /* movie-listener */,
 				60BB5F29231E3459006B9E4B /* Products */,
 			);
@@ -56,8 +61,9 @@
 		60BB5F2A231E3459006B9E4B /* movie-listener */ = {
 			isa = PBXGroup;
 			children = (
-				60BB5F2B231E3459006B9E4B /* AppDelegate.swift */,
 				607A23C8231EB80600D26B00 /* APIRequest.swift */,
+				60BB5F2B231E3459006B9E4B /* AppDelegate.swift */,
+				60461F90231F008400590771 /* MovieMap.swift */,
 				60BB5F2D231E3459006B9E4B /* ViewController.swift */,
 				60BB5F32231E345A006B9E4B /* Assets.xcassets */,
 				60BB5F34231E345A006B9E4B /* LaunchScreen.storyboard */,
@@ -126,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60F6AA4A231E720100FCC8E2 /* Main.storyboard in Resources */,
+				60F6AA4C231EA6F900FCC8E2 /* Default-568h@2x.png in Resources */,
 				60BB5F36231E345A006B9E4B /* LaunchScreen.storyboard in Resources */,
 				60BB5F33231E345A006B9E4B /* Assets.xcassets in Resources */,
 			);
@@ -139,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				60BB5F2E231E3459006B9E4B /* ViewController.swift in Sources */,
+				60461F91231F008400590771 /* MovieMap.swift in Sources */,
 				607A23C9231EB80600D26B00 /* APIRequest.swift in Sources */,
 				60BB5F2C231E3459006B9E4B /* AppDelegate.swift in Sources */,
 			);
