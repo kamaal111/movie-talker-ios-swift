@@ -181,6 +181,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             tapToSpeakButton.setTitleColor(.gray, for: .normal)
         } else {
             for movie in self.MovieList {
+                movie.isUserInteractionEnabled = false
                 movie.text = ""
             }
             
