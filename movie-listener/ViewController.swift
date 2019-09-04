@@ -11,15 +11,16 @@ import UIKit
 import Speech
 
 class ViewController: UIViewController, SFSpeechRecognizerDelegate {
+    
     @IBOutlet weak var spokenTextLabel: UILabel!
     @IBOutlet weak var tapToSpeakButton: UIButton!
     
     @IBOutlet var MovieList: [UILabel]!
     
-    
     var titleLength = 1
     let baseUrl = "http://localhost:5000"
 //    let baseUrl = "https://pure-gorge-27494.herokuapp.com"
+
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? =  SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     let request = SFSpeechAudioBufferRecognitionRequest()
@@ -52,6 +53,11 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.spokenTextLabel.text = ""
+        for movie in self.MovieList {
+            movie.text = ""
+        }
         
         self.requestSpeechAutherization()
     }
@@ -112,17 +118,29 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         recognitionTask?.cancel()
     }
     
+    var model = [MovieMap]()
+    
+    
     func getMovies(at url: String, for title: String?) -> Void {
         if let title = title {
+            
             apiRequest(at: url, for: title, completion: {
+                
                 (res: Any) in if let dictionary = res as? [String: Any],
-                    let data = dictionary["data"] as? [String: Any],
-                    let results = data["results"] as? [[String: Any]] {
-                    print(results.count)
-//                    for result in results {
-//                        print(result)
-//                    }
-                }
+                    let data = dictionary["data"] as? [String: Any] {
+                    
+                    self.model.append(MovieMap(data))
+                    print("start", self.model[0].results.count)
+
+                        for (index, result) in self.model[0].results.enumerated() {
+                            //  release_date
+                            if let originalTitle = result["original_title"] as? String {
+                                DispatchQueue.main.async {
+                                    self.MovieList[index].text = originalTitle
+                                }
+                            }
+                        }
+                    }
             })
         }
     }
@@ -130,7 +148,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBAction func tapToSpeak(_ sender: UIButton) {
         if isRecording == true {
             self.cancelRecording()
-            self.getMovies(at: self.baseUrl, for: self.spokenTextLabel.text)
+//            self.getMovies(at: self.baseUrl, for: self.spokenTextLabel.text)
+            self.getMovies(at: self.baseUrl, for: "Batman")
+            if (self.model.count >= 1) {
+                 print("End", self.model[0].results.count)
+            }
+           
             isRecording = false
             tapToSpeakButton.setTitle("START", for: .normal)
             tapToSpeakButton.setTitleColor(.gray, for: .normal)
