@@ -14,10 +14,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     @IBOutlet weak var spokenTextLabel: UILabel!
     @IBOutlet weak var tapToSpeakButton: UIButton!
+    @IBOutlet weak var titleLengthLable: UILabel!
+    @IBOutlet weak var titleLengthStepperValue: UIStepper!
     
     @IBOutlet var MovieList: [UILabel]!
+    @IBOutlet var yearList: [UILabel]!
     
-    var titleLength = 1
     let baseUrl = "http://localhost:5000"
 //    let baseUrl = "https://pure-gorge-27494.herokuapp.com"
 
@@ -27,6 +29,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     var model = [MovieMap]()
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
+    var outputLanguage = ["en-AU", "ja-JA"]
     
     func requestSpeechAutherization() -> Void {
         SFSpeechRecognizer.requestAuthorization {
@@ -56,7 +59,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         super.viewDidLoad()
         
         self.spokenTextLabel.text = ""
-        for movie in self.MovieList {
+        self.titleLengthStepperValue.autorepeat = true
+        self.titleLengthStepperValue.minimumValue = 1.0
+        self.titleLengthStepperValue.maximumValue = 4.0
+        self.titleLengthLable.text = "\(1)"
+        for (index, movie) in self.MovieList.enumerated() {
+            self.yearList[index].text = ""
+            movie.isUserInteractionEnabled = false
             movie.text = ""
         }
         
@@ -64,7 +73,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     func sendAlert(message: String) {
-        let alert = UIAlertController(title: "Speech Recognizer Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Speech Recognizer Error", message: message,
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -100,11 +110,13 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                 let bestString = result.bestTranscription.formattedString
                 let splittenString = bestString.split(separator: " ")
                 
-                if splittenString.count >= self.titleLength {
-                    
-                    let range = splittenString.index(splittenString.endIndex, offsetBy: -self.titleLength) ..< splittenString.endIndex
-                    let slicedArray = splittenString[range]
-                    self.spokenTextLabel.text = (slicedArray.joined(separator:" "))
+                if let string = self.titleLengthLable.text, let myInt = Int(string){
+                    if splittenString.count >= myInt {
+                        let range = splittenString.index(splittenString.endIndex,
+                                                         offsetBy: -myInt) ..< splittenString.endIndex
+                        let slicedArray = splittenString[range]
+                        self.spokenTextLabel.text = (slicedArray.joined(separator:" "))
+                    }
                 }
             } else if let error = error {
                 print(error)
@@ -116,21 +128,20 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         audioEngine.stop()
         let node  = audioEngine.inputNode
         node.removeTap(onBus: 0)
-        
         recognitionTask?.cancel()
     }
     
     @objc func tapMovie(sender: UITapGestureRecognizer) {
-        let currentIndex: Int = self.model.count - 1
+        let currentIndex = self.model.count - 1
         let movie = self.model[currentIndex]
             .results[Int.random(in: 0..<self.model[currentIndex].results.count)]
         if let overview = movie["overview"] as? String {
             let utterance = AVSpeechUtterance(string: overview)
-            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
-            utterance.rate = 0.5
+            utterance.voice = AVSpeechSynthesisVoice(language: self.outputLanguage[0])
+            utterance.rate = 0.4
             let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
-            print(overview)
+            print("overview", overview)
         }
     }
     
@@ -151,11 +162,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                                 let _ = result["overview"] as? String,
                                 let _ = result["release_date"] as? String {
                                 DispatchQueue.main.async {
+//                                    let splittenReleaseDate = releaseDate.split(separator: "-")[0]
                                     self.MovieList[index].text = originalTitle
-
+//                                    self.yearList[index].text = String(splittenReleaseDate)
                                     let tap = UITapGestureRecognizer(
-                                        target: self, action: #selector(self.tapMovie(sender:))
-                                    )
+                                        target: self, action: #selector(
+                                            self.tapMovie(sender:)))
                                     self.MovieList[index].isUserInteractionEnabled = true
                                     self.MovieList[index].addGestureRecognizer(tap)
                                 }
@@ -165,12 +177,16 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             })
         }
     }
+    
+    @IBAction func titleLengthCounterButton(_ sender: UIStepper) {
+        self.titleLengthLable.text = "\(Int(self.titleLengthStepperValue.value))"
+    }
 
     @IBAction func tapToSpeak(_ sender: UIButton) {
         if isRecording == true {
             self.cancelRecording()
-            self.getMovies(at: self.baseUrl, for: self.spokenTextLabel.text)
-//            self.getMovies(at: self.baseUrl, for: "Batman")
+            let modifiedMovie = self.spokenTextLabel.text?.split(separator: " ").joined(separator: "%20")
+            self.getMovies(at: self.baseUrl, for: modifiedMovie)
 
             if (self.model.count >= 1) {
                  print("End", self.model[self.model.count - 1].results.count)
@@ -180,7 +196,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             tapToSpeakButton.setTitle("START", for: .normal)
             tapToSpeakButton.setTitleColor(.gray, for: .normal)
         } else {
-            for movie in self.MovieList {
+            for (index, movie) in self.MovieList.enumerated() {
+                self.yearList[index].text = ""
                 movie.isUserInteractionEnabled = false
                 movie.text = ""
             }
