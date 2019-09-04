@@ -17,6 +17,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var titleLengthLable: UILabel!
     @IBOutlet weak var titleLengthStepperValue: UIStepper!
     
+    @IBOutlet weak var languageSegment: UISegmentedControl!
+    
     @IBOutlet var MovieList: [UILabel]!
     @IBOutlet var yearList: [UILabel]!
     
@@ -29,7 +31,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     var model = [MovieMap]()
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
-    var outputLanguage = ["en-AU", "ja-JA"]
+    var outputLanguage = "en-AU"
     
     func requestSpeechAutherization() -> Void {
         SFSpeechRecognizer.requestAuthorization {
@@ -137,7 +139,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             .results[Int.random(in: 0..<self.model[currentIndex].results.count)]
         if let overview = movie["overview"] as? String {
             let utterance = AVSpeechUtterance(string: overview)
-            utterance.voice = AVSpeechSynthesisVoice(language: self.outputLanguage[0])
+            utterance.voice = AVSpeechSynthesisVoice(language: self.outputLanguage)
             utterance.rate = 0.4
             let synthesizer = AVSpeechSynthesizer()
             synthesizer.speak(utterance)
@@ -181,6 +183,17 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBAction func titleLengthCounterButton(_ sender: UIStepper) {
         self.titleLengthLable.text = "\(Int(self.titleLengthStepperValue.value))"
     }
+    
+    @IBAction func langSegmentChanged(_ sender: UISegmentedControl) {
+        if let segmentLang = self.languageSegment.titleForSegment(at: sender.selectedSegmentIndex) {
+            switch segmentLang {
+            case "JP": return self.outputLanguage = "ja-JA"
+            case "EN": return self.outputLanguage = "en-AU"
+            default: return self.outputLanguage = "en-US"
+            }
+        }
+    }
+    
 
     @IBAction func tapToSpeak(_ sender: UIButton) {
         if isRecording == true {

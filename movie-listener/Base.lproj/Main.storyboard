@@ -446,8 +446,8 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iQC-Ta-fOd" secondAttribute="trailing" constant="20" symbolic="YES" id="zqV-28-del"/>
                                 </constraints>
                             </scrollView>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="qkF-co-VzR">
-                                <rect key="frame" x="8" y="40" width="94" height="29"/>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="qkF-co-VzR">
+                                <rect key="frame" x="8" y="62" width="94" height="29"/>
                                 <connections>
                                     <action selector="titleLengthCounterButton:" destination="BYZ-38-t0r" eventType="valueChanged" id="2Pb-Us-RHn"/>
                                 </connections>
@@ -458,19 +458,36 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="U8i-Hd-i0o">
+                                <rect key="frame" x="8" y="26" width="65" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="SRD-7V-5N0"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="EN"/>
+                                    <segment title="JP"/>
+                                </segments>
+                                <connections>
+                                    <action selector="langSegmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="IPh-LB-qwY"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="747-Re-dee" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="U8i-Hd-i0o" secondAttribute="trailing" constant="8" symbolic="YES" id="419-aM-pkp"/>
+                            <constraint firstItem="U8i-Hd-i0o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="6" id="5Un-vD-DWU"/>
+                            <constraint firstItem="N3w-qH-agU" firstAttribute="leading" secondItem="747-Re-dee" secondAttribute="trailing" constant="103.5" id="6bU-TE-b2J"/>
                             <constraint firstItem="vZw-MX-TQw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8we-sD-SxZ"/>
                             <constraint firstItem="N3w-qH-agU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="G8J-1d-Htx"/>
-                            <constraint firstItem="qkF-co-VzR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Gxi-K1-9qd"/>
                             <constraint firstItem="xS2-0w-UD4" firstAttribute="top" secondItem="747-Re-dee" secondAttribute="bottom" constant="50" id="JHG-Vb-no8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N3w-qH-agU" secondAttribute="trailing" constant="8" id="KUG-0M-1I9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="N3w-qH-agU" secondAttribute="trailing" id="KUG-0M-1I9"/>
                             <constraint firstAttribute="bottomMargin" secondItem="xS2-0w-UD4" secondAttribute="bottom" constant="-1" id="OLa-bv-sHa"/>
+                            <constraint firstItem="U8i-Hd-i0o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="UwE-UO-bYA"/>
                             <constraint firstItem="xS2-0w-UD4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WoB-rm-uix"/>
                             <constraint firstItem="747-Re-dee" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zvw-f4-98V"/>
                             <constraint firstItem="vZw-MX-TQw" firstAttribute="top" secondItem="747-Re-dee" secondAttribute="bottom" constant="8" id="bUb-P5-KXo"/>
                             <constraint firstItem="xS2-0w-UD4" firstAttribute="centerX" secondItem="747-Re-dee" secondAttribute="centerX" id="hNQ-rA-QHs"/>
+                            <constraint firstItem="qkF-co-VzR" firstAttribute="top" secondItem="U8i-Hd-i0o" secondAttribute="bottom" constant="8" id="j2J-yu-0B0"/>
                             <constraint firstItem="747-Re-dee" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="jrC-3y-Js5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vZw-MX-TQw" secondAttribute="trailing" symbolic="YES" id="kcg-iw-tMv"/>
                             <constraint firstItem="qkF-co-VzR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="oDS-1C-xNG"/>
@@ -479,6 +496,7 @@
                     </view>
                     <size key="freeformSize" width="320" height="1525"/>
                     <connections>
+                        <outlet property="languageSegment" destination="U8i-Hd-i0o" id="nxn-dE-zs2"/>
                         <outlet property="spokenTextLabel" destination="vZw-MX-TQw" id="fPr-G1-00A"/>
                         <outlet property="tapToSpeakButton" destination="747-Re-dee" id="dnK-rU-oDe"/>
                         <outlet property="titleLengthLable" destination="N3w-qH-agU" id="1eC-fp-ZdI"/>
