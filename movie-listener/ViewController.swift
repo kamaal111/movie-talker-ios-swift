@@ -6,9 +6,9 @@
 //  Copyright © 2019 Kamaal. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Speech
+import AVFoundation
 
 class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
@@ -24,9 +24,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? =  SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     let request = SFSpeechAudioBufferRecognitionRequest()
+    var model = [MovieMap]()
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
-    var model = [MovieMap]()
     
     func requestSpeechAutherization() -> Void {
         SFSpeechRecognizer.requestAuthorization {
@@ -96,11 +96,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: {
             result, error in
             if let result = result {
-                let bestString = result.bestTranscription.formattedString
                 
+                let bestString = result.bestTranscription.formattedString
                 let splittenString = bestString.split(separator: " ")
                 
                 if splittenString.count >= self.titleLength {
+                    
                     let range = splittenString.index(splittenString.endIndex, offsetBy: -self.titleLength) ..< splittenString.endIndex
                     let slicedArray = splittenString[range]
                     self.spokenTextLabel.text = (slicedArray.joined(separator:" "))
@@ -120,8 +121,15 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     @objc func tapMovie(sender: UITapGestureRecognizer) {
-        let movie = self.model[0].results[0]
-        if let overview = movie["overview"] {
+        let currentIndex: Int = self.model.count - 1
+        let movie = self.model[currentIndex]
+            .results[Int.random(in: 0..<self.model[currentIndex].results.count)]
+        if let overview = movie["overview"] as? String {
+            let utterance = AVSpeechUtterance(string: overview)
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-GB")
+            utterance.rate = 0.5
+            let synthesizer = AVSpeechSynthesizer()
+            synthesizer.speak(utterance)
             print(overview)
         }
     }
@@ -136,12 +144,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                     let data = dictionary["data"] as? [String: Any] {
                     
                     self.model.append(MovieMap(data))
-                    print("start", self.model[0].results.count)
+                    print("start", self.model[self.model.count - 1].results.count)
 
-                        for (index, result) in self.model[0].results.enumerated() {
-                            //  release_date
+                        for (index, result) in self.model[self.model.count - 1].results.enumerated() {
                             if let originalTitle = result["original_title"] as? String,
-                                let _ = result["overview"] as? String {
+                                let _ = result["overview"] as? String,
+                                let _ = result["release_date"] as? String {
                                 DispatchQueue.main.async {
                                     self.MovieList[index].text = originalTitle
 
@@ -161,16 +169,22 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBAction func tapToSpeak(_ sender: UIButton) {
         if isRecording == true {
             self.cancelRecording()
-//            self.getMovies(at: self.baseUrl, for: self.spokenTextLabel.text)
-            self.getMovies(at: self.baseUrl, for: "Batman")
+            self.getMovies(at: self.baseUrl, for: self.spokenTextLabel.text)
+//            self.getMovies(at: self.baseUrl, for: "Batman")
+
             if (self.model.count >= 1) {
-                 print("End", self.model[0].results.count)
+                 print("End", self.model[self.model.count - 1].results.count)
             }
            
             isRecording = false
             tapToSpeakButton.setTitle("START", for: .normal)
             tapToSpeakButton.setTitleColor(.gray, for: .normal)
         } else {
+            for movie in self.MovieList {
+                movie.isUserInteractionEnabled = false
+                movie.text = ""
+            }
+            
             self.recordAndRecognizeSpeech()
             isRecording = true
             tapToSpeakButton.setTitle("STOP", for: .normal)
