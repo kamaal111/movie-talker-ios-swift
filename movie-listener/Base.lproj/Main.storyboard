@@ -211,7 +211,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D54-dq-TNu">
-                                                <rect key="frame" x="20" y="947" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="947" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -225,7 +225,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOd-rf-5tu">
-                                                <rect key="frame" x="20" y="1016" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="1016" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -239,7 +239,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCh-5C-80Z">
-                                                <rect key="frame" x="20" y="1085" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="1085" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -253,7 +253,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpf-qo-7z6">
-                                                <rect key="frame" x="20" y="1154" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="1154" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -267,12 +267,12 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIM-K4-87B">
-                                                <rect key="frame" x="20" y="1223" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="1223" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5G-tE-hLW">
-                                                <rect key="frame" x="20" y="1292" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="1292" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -304,7 +304,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idv-O5-j6B">
-                                                <rect key="frame" x="20" y="878" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="878" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -319,7 +319,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3G1-9V-JYH">
-                                                <rect key="frame" x="20" y="1361" width="48.5" height="19"/>
+                                                <rect key="frame" x="20" y="1361" width="49" height="19"/>
                                                 <fontDescription key="fontDescription" name="Kailasa" family="Kailasa" pointSize="14"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -329,7 +329,6 @@
                                             <constraint firstItem="o6M-Ew-Sw2" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="0f5-Cd-Egz"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6vE-rh-fie" secondAttribute="trailing" constant="20" symbolic="YES" id="18f-1I-gjW"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="b3W-N7-zpP" secondAttribute="trailing" constant="20" symbolic="YES" id="1Up-AI-ugY"/>
-                                            <constraint firstItem="pWB-MZ-KFG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QOT-Oz-6Ot" secondAttribute="leading" id="1Vc-AH-c7z"/>
                                             <constraint firstItem="DjC-Lp-6sS" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="1ln-I5-G40"/>
                                             <constraint firstItem="0Gl-Kp-9MH" firstAttribute="top" secondItem="iQC-Ta-fOd" secondAttribute="bottom" constant="20" id="20T-BD-f2T"/>
                                             <constraint firstItem="qkE-0d-qmV" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="2JG-bF-pop"/>
@@ -346,8 +345,6 @@
                                             <constraint firstItem="aXn-JV-bXX" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="5ni-QK-wRn"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Z5G-tE-hLW" secondAttribute="trailing" constant="20" symbolic="YES" id="5w4-GL-RYf"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NIM-K4-87B" secondAttribute="trailing" constant="20" symbolic="YES" id="6Qb-MM-dLE"/>
-                                            <constraint firstItem="pWB-MZ-KFG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qkE-0d-qmV" secondAttribute="leading" id="7SG-Hn-EEc"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pWB-MZ-KFG" secondAttribute="trailing" id="7cu-0T-cjg"/>
                                             <constraint firstItem="idv-O5-j6B" firstAttribute="top" secondItem="zRL-tm-Y3u" secondAttribute="bottom" constant="8" id="7yP-Br-Bns"/>
                                             <constraint firstItem="iQC-Ta-fOd" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="96V-F3-fBW"/>
                                             <constraint firstItem="8BR-o5-Ht8" firstAttribute="top" secondItem="PCh-5C-80Z" secondAttribute="bottom" constant="20" id="Abm-1F-LZD"/>
@@ -407,7 +404,6 @@
                                             <constraint firstItem="Qma-pC-ZFK" firstAttribute="top" secondItem="BRB-h4-cRj" secondAttribute="bottom" constant="8" id="YG6-aU-bzy"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lOd-rf-5tu" secondAttribute="trailing" constant="20" symbolic="YES" id="ZSW-54-aAB"/>
                                             <constraint firstItem="D54-dq-TNu" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="ZoB-RG-T1Q"/>
-                                            <constraint firstAttribute="trailing" secondItem="pWB-MZ-KFG" secondAttribute="trailing" constant="229" id="a28-ol-IyZ"/>
                                             <constraint firstItem="BRB-h4-cRj" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="aYq-5Q-rr1"/>
                                             <constraint firstItem="WJB-D7-Svj" firstAttribute="top" secondItem="bRZ-Ka-jhg" secondAttribute="bottom" constant="8" id="bBq-h5-k25"/>
                                             <constraint firstItem="XeN-RU-xBW" firstAttribute="trailing" secondItem="zRL-tm-Y3u" secondAttribute="trailing" id="bHO-at-4qg"/>
@@ -425,6 +421,7 @@
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="o6M-Ew-Sw2" secondAttribute="trailing" constant="20" symbolic="YES" id="hmf-XH-fW2"/>
                                             <constraint firstItem="xRE-Wg-hIW" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="id8-IY-qZl"/>
                                             <constraint firstItem="a2g-NL-YvM" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="ijM-jz-UBY"/>
+                                            <constraint firstItem="pWB-MZ-KFG" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="kOX-tc-8FZ"/>
                                             <constraint firstItem="8BR-o5-Ht8" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="krh-E9-A1U"/>
                                             <constraint firstItem="jNO-C9-D9O" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="kzF-mu-NIi"/>
                                             <constraint firstItem="0Gl-Kp-9MH" firstAttribute="leading" secondItem="QOT-Oz-6Ot" secondAttribute="leading" constant="20" id="m2s-es-SWY"/>
@@ -455,6 +452,7 @@
                                     <constraint firstItem="QOT-Oz-6Ot" firstAttribute="leading" secondItem="xS2-0w-UD4" secondAttribute="leading" id="EHR-hw-XHD"/>
                                     <constraint firstAttribute="bottom" secondItem="QOT-Oz-6Ot" secondAttribute="bottom" id="OhJ-ID-UON"/>
                                     <constraint firstItem="QOT-Oz-6Ot" firstAttribute="top" secondItem="xS2-0w-UD4" secondAttribute="top" id="P8I-C9-qRc"/>
+                                    <constraint firstItem="QOT-Oz-6Ot" firstAttribute="centerX" secondItem="xS2-0w-UD4" secondAttribute="centerX" id="XbR-cg-ZtF"/>
                                     <constraint firstAttribute="trailing" secondItem="QOT-Oz-6Ot" secondAttribute="trailing" id="mDi-GP-Ta0"/>
                                 </constraints>
                             </scrollView>
@@ -510,7 +508,6 @@
                     <connections>
                         <outlet property="innerView" destination="QOT-Oz-6Ot" id="yTP-Qp-3Mz"/>
                         <outlet property="languageSegment" destination="U8i-Hd-i0o" id="nxn-dE-zs2"/>
-                        <outlet property="scroller" destination="xS2-0w-UD4" id="c0g-ve-Qko"/>
                         <outlet property="spokenTextLabel" destination="vZw-MX-TQw" id="fPr-G1-00A"/>
                         <outlet property="tapToSpeakButton" destination="747-Re-dee" id="dnK-rU-oDe"/>
                         <outlet property="titleLengthLable" destination="N3w-qH-agU" id="1eC-fp-ZdI"/>

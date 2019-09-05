@@ -19,7 +19,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     
     @IBOutlet weak var languageSegment: UISegmentedControl!
     
-    @IBOutlet weak var scroller: UIScrollView!
     @IBOutlet weak var innerView: UIView!
     @IBOutlet var MovieList: [UILabel]!
     @IBOutlet var yearList: [UILabel]!
@@ -30,9 +29,12 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? =  SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
     let request = SFSpeechAudioBufferRecognitionRequest()
-    var model = [MovieMap]()
+    let synthesizer = AVSpeechSynthesizer()
+    
+    var model: [MovieMap] = [MovieMap]()
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
+    
     
     enum Theme {
         case
@@ -167,17 +169,17 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             let utterance = AVSpeechUtterance(string: overview)
             utterance.voice = AVSpeechSynthesisVoice(language: self.outputLanguage)
             utterance.rate = 0.4
-            let synthesizer = AVSpeechSynthesizer()
-            synthesizer.speak(utterance)
+            
+            self.synthesizer.speak(utterance)
             print("overview", overview)
         }
     }
     
     
-    func getMovies(at url: String, for title: String?) -> Void {
+    func getMovies(at url: String, for title: String?, on page: String) -> Void {
         if let title = title {
             
-            apiRequest(at: url, for: title, completion: {
+            apiRequest(at: url, for: title, on: page, completion: {
                 
                 (res: Any) in if let dictionary = res as? [String: Any],
                     let data = dictionary["data"] as? [String: Any] {
@@ -187,7 +189,6 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
 
                         for (index, result) in self.model[self.model.count - 1].results.enumerated() {
                             if let originalTitle = result["original_title"] as? String,
-                                let _ = result["overview"] as? String,
                                 let _ = result["release_date"] as? String {
                                 DispatchQueue.main.async {
 //                                    let splittenReleaseDate = releaseDate.split(separator: "-")[0]
@@ -285,8 +286,10 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
         if isRecording == true {
             self.cancelRecording()
             let modifiedMovie = self.spokenTextLabel.text?.split(separator: " ").joined(separator: "%20")
-            self.getMovies(at: self.baseUrl, for: modifiedMovie)
-//            self.getMovies(at: self.baseUrl, for: "Batman")
+            self.getMovies(at: self.baseUrl, for: modifiedMovie, on: "1")
+
+////          testing without speaking
+//            self.getMovies(at: self.baseUrl, for: "batman")
 
             if (self.model.count >= 1) {
                  print("End", self.model[self.model.count - 1].results.count)

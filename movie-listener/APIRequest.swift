@@ -8,8 +8,8 @@
 
 import Foundation
 
-func apiRequest(at url: String, for title: String, completion: @escaping (_ res: [String: Any]) -> Void) {
-    guard let url = URL(string: "\(url)/movies/search/\(title)") else { return }
+func apiRequest(at url: String, for title: String, on page: String, completion: @escaping (_ res: [String: Any]) -> Void) {
+    guard let url = URL(string: "\(url)/movies/search/\(title)/\(page)") else { return }
     let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
         guard let dataResponse = data, error == nil else {
             print(error?.localizedDescription ?? "Response Error")
