@@ -23,8 +23,9 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet var MovieList: [UILabel]!
     @IBOutlet var yearList: [UILabel]!
     
-    let baseUrl = "http://localhost:5000"
-//    let baseUrl = "https://pure-gorge-27494.herokuapp.com"
+    
+//    let baseUrl = "http://localhost:5000"
+    let baseUrl = "https://pure-gorge-27494.herokuapp.com"
 
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? =  SFSpeechRecognizer(locale: Locale.init(identifier: "en-US"))
@@ -171,7 +172,8 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
             utterance.rate = 0.4
             
             self.synthesizer.speak(utterance)
-            print("overview", overview)
+            
+            print("location", sender.location(in: self.innerView))
         }
     }
     
@@ -190,6 +192,7 @@ class ViewController: UIViewController, SFSpeechRecognizerDelegate {
                         for (index, result) in self.model[self.model.count - 1].results.enumerated() {
                             if let originalTitle = result["original_title"] as? String,
                                 let _ = result["release_date"] as? String {
+                                
                                 DispatchQueue.main.async {
 //                                    let splittenReleaseDate = releaseDate.split(separator: "-")[0]
                                     self.MovieList[index].text = originalTitle
